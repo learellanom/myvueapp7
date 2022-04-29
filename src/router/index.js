@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import myRegistro from '../views/myRegistro.vue'
+import myConsulta from '../views/myConsulta.vue'
 const routes = [
   {
     path: '/',
@@ -8,12 +9,22 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/registro',
+    name: 'registro',
+    component: myRegistro
+    // props: {
+    //   p_Apellido: route => ({ query: route.query.q })
+    // }
+  },
+  {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: HomeView
+  },
+  {
+    path: '/consulta',
+    name: 'consulta',
+    component: myConsulta
   }
 ]
 
