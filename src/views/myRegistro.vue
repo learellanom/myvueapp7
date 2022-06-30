@@ -214,7 +214,7 @@ export default {
               celectronico :"",
               fingreso : "",
               narea: "",
-              dstatus : "",
+              dstatus : "Activo",
               fregistro: ""  
       },
       myTitle: "Registro",
@@ -230,42 +230,42 @@ export default {
   methods: {
     Valida: function (e) {
       let myValidData = false
-      /*
-      if(!((/^[A-Z ]+$/g).test(this.pApellido))){
+
+      if(!((/^[A-Z ]+$/g).test(this.empleado.papellido))){
           e.preventDefault();
-          alert("El Primer Apellido solo debe contener letras mayusculas sin acentos ni ñ" + this.pApellido);
+          alert("El Primer Apellido solo debe contener letras mayusculas sin acentos ni ñ");
           return myValidData
       }
 
-      if(!((/^[A-Z ]+$/g).test(this.sApellido))){
+      if(!((/^[A-Z ]+$/g).test(this.empleado.sapellido))){
           e.preventDefault();
-          alert("El Segundo Apellido solo debe contener letras mayusculas sin acentos ni ñ" + this.pApellido);
+          alert("El Segundo Apellido solo debe contener letras mayusculas sin acentos ni ñ");
           return myValidData
       }
 
-      if(!((/^[A-Z ]+$/g).test(this.pNombre))){
+      if(!((/^[A-Z ]+$/g).test(this.empleado.pnombre))){
           e.preventDefault();
-          alert("El nombre solo debe contener letras mayusculas sin acentos ni ñ" + this.pApellido);
+          alert("El nombre solo debe contener letras mayusculas sin acentos ni ñ");
           return myValidData
       }
 
-      if(!((/^[A-Z ]+$/g).test(this.oNombres))){
+      if(!((/^[A-Z ]+$/g).test(this.empleado.onombres))){
           e.preventDefault();
-          alert("Otros nombres solo debe contener letras mayusculas sin acentos ni ñ" + this.pApellido);
+          alert("Otros nombres solo debe contener letras mayusculas sin acentos ni ñ");
           return myValidData
       }
 
-      if(!((/^[a-zA-Z0-9 ]+$/g).test(this.nIdentificacion))){
+      if(!((/^[a-zA-Z0-9 ]+$/g).test(this.empleado.nidentificacion))){
           e.preventDefault();
-          alert("Numero de indentificación solo debe contener letras mayusculas sin acentos ni ñ y numeros" + this.pApellido);
+          alert("Numero de indentificación solo debe contener letras mayusculas sin acentos ni ñ y numeros");
           return myValidData
       }
-    */
+    
       // let myVar = this.pPais
       // return true;
       if (!this.empleado.ppais) {
         e.preventDefault()
-        alert('Debe seleccionar un pais de asignación ' + this.pPais)
+        alert('Debe seleccionar un pais de asignación ')
           return myValidData
       }
 
@@ -290,7 +290,7 @@ export default {
       let myResponse = null;
       if (!this.myUpdate){
           myResponse = this.inserta();
-          alert('Empleado Registrado Satisfactoriamente' + this.empleado.id + " Asi inserta : " + myResponse )          
+          alert('Empleado Registrado Satisfactoriamente' + this.empleado.id)          
       }
       else{
         myResponse = this.actualiza()
@@ -321,7 +321,6 @@ export default {
       + "."
       + ((this.empleado.ppais == "Colombia") ? "co" : "us")
 
-      alert("cambio " + myCorreo);
       this.empleado.celectronico = myCorreo;
     }
   },
