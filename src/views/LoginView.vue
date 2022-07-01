@@ -23,38 +23,45 @@
       <input class="form-submit" type="submit" value="Login">
     </form>
     <p class="msg">¿No tienes cuenta?
-      <router-link to="/register">Regístrate</router-link>
+    <router-link to="/registrate">Regístrate</router-link>
     </p>
   </div>
 </template>
 
 <script>
-import auth from "@/logic/auth";
+// import auth from "@/logic/auth";
 export default {
   data: () => ({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     error: false
+    // p_logged: this.$route.query.p_logged
   }),
   methods: {
-    async login() {
+    async login () {
       try {
-        await auth.login(this.email, this.password);
+        // await auth.login(this.email, this.password);
         const user = {
           email: this.email
-        };
-        auth.setUserLogged(user);
-        this.$router.push("/");
+        }
+        // auth.setUserLogged(user);
+        console.log(user)
+        this.$router.replace({ path: '/', params: { p_logged: 'true' } })
+        localStorage.setItem('p_logged', true)
+        localStorage.setItem('admin', true)
+        location.replace(location.origin)
       } catch (error) {
-        console.log(error);
-        this.error = true;
+        console.log(error)
+        this.error = true
       }
     }
+  },
+  mounted () {
   }
-};
+}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .login {
   padding: 2rem;
 }

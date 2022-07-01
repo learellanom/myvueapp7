@@ -8,32 +8,21 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Primer Nombre</th>
+            <th>Nombre</th>
 
-            <th>Primer Apellido</th>
+            <th>Correo Electronico</th>
 
-            <th>Pais</th>
-            <th>Nro Identificación</th>
-
-            <th>Fch Ingreso</th>
-            <th>Area</th>
-            <th>Estado</th>
-            <th>Accion</th>
+            <th>Clave</th>
           </tr>
         </thead>
         <tbody height="100">
           <tr v-for="item in items" v-bind:key="item.id">
             <td>{{ item.id }}</td>
-            <td>{{ item.pnombre }}</td>
+            <td>{{ item.nombre }}</td>
 
-            <td>{{ item.papellido }}</td>
+            <td>{{ item.celectronico }}</td>
 
-            <td>{{ item.ppais }}</td>
-            <td>{{ item.nidentificacion }}</td>
-
-            <td>{{ item.fingreso }}</td>
-            <td>{{ item.narea }}</td>
-            <td>{{ item.dstatus }}</td>
+            <td>{{ item.clave }}</td>
             <td>
               <p>
                 <router-link :to="{path: 'registro', query: {p_id: item.id  }}">Editar </router-link>
@@ -60,18 +49,13 @@
           <tr v-for="item in items" v-bind:key="item.id">
             <td>
             <br><strong>ID :</strong> {{ item.id }}
-            <br><strong>Nombre :</strong> {{ item.pnombre }}
-            <br><strong>Apellido :</strong> {{ item.papellido }}
-            <br><strong>Pais :</strong> {{ item.ppais }}
-            <br><strong>Identificacion :</strong> {{ item.nidentificacion }}
-            <br><strong>Ingreso :</strong> {{ item.fingreso }}
-            <br><strong>Area :</strong> {{ item.narea }}
-            <br><strong>Estado :</strong> {{ item.dstatus }}
+            <br><strong>Nombre :</strong> {{ item.nombre }}
+            <br><strong>Correo :</strong> {{ item.celectronico }}
+            <br><strong>Clave :</strong> {{ item.clave }}
               <p>
-                <br><router-link :to="{path: 'registro', query: {p_id: item.id  }}">Editar </router-link>
+                <br><router-link :to="{path: 'actualiza', query: {p_id: item.id  }}">Editar </router-link>
                 <!-- <router-link to="/registro">Delete</router-link> -->
                 <br><router-link to=""><span @click="elimina(item.id)">Eliminar</span></router-link>
-
               </p>
             </td>
           </tr>
@@ -88,12 +72,9 @@
 
 <script>
 /* eslint-disable */
-import myConsulta from "./myRegistro.vue";
+// import myConsulta from "./myRegistro.vue";
 import myUtil from '../components/myUtil.vue';
 export default {
-  components: {
-    myConsulta,
-  },
   data() {
     return {
       myData: null,
@@ -112,17 +93,18 @@ export default {
        return myUtil.myDataById(this.p_id);
     },
     inserta: function(){
-      return myUtil.myDataInsert(this.empleado);
+      return myUtil.myDataInsert(this.usuario);
     },
     elimina: function(idx){
-      let myConfirm = confirm("Eliminar Empleado?")
+      let myConfirm = confirm("Eliminar usuario?")
       if (myConfirm) {
         if (myUtil.myDataDelete(idx)) {
-          alert("Empleado Eliminado Satisfactoriamente");
+          alert("Usuario Eliminado Satisfactoriamente");
         }else{
-          alert("Error al Eliminar Empleado");
+          alert("Error al Eliminar Usuario");
         }
       }
+      location.reload();
       return;
     },
   },

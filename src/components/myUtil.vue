@@ -4,10 +4,16 @@ import datos from '../assets/json/data00.json'
 var myDataRes
 
 function myData () {
+  //
+  // desde el API
   let myResponse = JSON.parse(ajax1())
+  //
+
+  // desde el Data json
   // return datos.map((item) => {
   //   return item
-  // })  
+  // })   
+  //
   return myResponse.map((item) => {
     return item
   })  
@@ -25,15 +31,20 @@ function ajax1(){
   xhttp.send();  
   return myRes
 }
-
+/*
+*
+*
+*
+*
+*/
 function myDataById2 (Id) {
-  //   let myId = datos.find( (x) => {
-  //       return x.id == Id;
-  //   })
-  // return myId
+    let myId = datos.find( (x) => {
+         return x.id == Id;
+     })
+   return myId
 }
 
-function myDataById(id){
+function myDataById (id){
   let myRes = null;
 
   const xhttp = new XMLHttpRequest();
@@ -45,8 +56,13 @@ function myDataById(id){
   xhttp.send();  
   return JSON.parse(myRes)
 }
-
-function myDataInsert (empleado) {
+/*
+*
+* 
+* Inserta 
+*
+*/
+function myDataInsert (usuario) {
 
     let myResponse2 = JSON.parse(ajax1())
     let myId = myResponse2.length + 1
@@ -54,24 +70,24 @@ function myDataInsert (empleado) {
 
     let myResponse = false
 
-    if (!empleado) { return myResponse}
-    if (empleado == null) { return myResponse}
-    if (empleado == undefined) { return myResponse}
+    if (!usuario) { return myResponse}
+    if (usuario == null) { return myResponse}
+    if (usuario == undefined) { return myResponse}
      
-    empleado.id = myId
+    usuario.id = myId
 
-    ajax3(empleado)
+     ajax3(usuario)
 
-    // datos.push(empleado)
+    // datos.push(usuario)
     
     myResponse = true
     
     return myResponse
 }
 
-function ajax3(empleado){
+function ajax3(usuario){
   let myRes = null;
-  empleado.id = 999
+  usuario.id = 999
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
    myRes = this.responseText;
@@ -79,61 +95,67 @@ function ajax3(empleado){
   }
   xhttp.open("POST", "http://localhost:3000/dataInsert", false);
   xhttp.setRequestHeader("Content-type", "application/json");  
-  xhttp.send(JSON.stringify(empleado));  
+  xhttp.send(JSON.stringify(usuario));  
   return myRes
 }
-
-function myDataUpdate (empleado) {
+/*
+*
+*
+* Update
+*
+*
+*/
+function myDataUpdate (usuario) {
     let myResponse = false
 
-    myResponse = ajax4(empleado);
-
+    myResponse = ajax4(usuario);
+    /*
     let myId = datos.findIndex( (x) => {
-        return x.id == empleado.id;
+        return x.id == user.id;
     })
 
     if (myId = -1) return myResponse
 
-    // datos[myId].id = empleado.id
-    datos[myId].papellido = empleado.papellido
-    datos[myId].sapellido = empleado.sapellido
-    datos[myId].pnombre = empleado.pnombre
-    datos[myId].onombres = empleado.onombres
-    datos[myId].ppais = empleado.ppais
-    datos[myId].tidentificacion = empleado.tidentificacion
-    datos[myId].nidentificacion = empleado.nidentificacion
-    datos[myId].celectronico = empleado.celectronico
-    datos[myId].fingreso = empleado.fingreso
-    datos[myId].narea = empleado.narea
-
+    // datos[myId].id = usuario.id
+    datos[myId].nombre = usuario.nombre
+    datos[myId].celectronico = usuario.celectronico
+    datos[myId].clave = usuario.clave
+    */
     return myResponse
 }
 
 
-function ajax4(empleado){
+function ajax4(usuario){
   let myRes = null;
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     myRes = JSON.parse(this.responseText); 
   }
-  xhttp.open("PUT", "http://localhost:3000/dataUpdate/" + Number(empleado.id), false);
+  xhttp.open("PUT", "http://localhost:3000/dataUpdate/" + Number(usuario.id), false);
   xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(JSON.stringify(empleado));  
+  xhttp.send(JSON.stringify(usuario));  
    myRes.error = (myRes.error == false) ? true : false
   return myRes
 }
-
+/*
+*
+*
+* Delete
+*
+*
+*/
 function myDataDelete(id) {
-    let myAnswer = null
-    myAnswer = ajax5(id)
-    return true
-
-    // let myId = datos.findIndex( (x) => {
-    //     return x.id == id;
-    // })
-    // if (myId == -1) return false
+     let myAnswer = null
+     myAnswer = ajax5(id)
+     return true
+    /*
+    let myId = datos.findIndex( (x) => {
+      return x.id == id;
+    })
+    if (myId == -1) return false
     // datos[myId].dstatus = "Inactivo"    
-    // return true
+    return true
+    */
 }
 
 function ajax5(id){

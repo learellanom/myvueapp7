@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import myRegistro from '../views/myRegistro.vue'
 import myConsulta from '../views/myConsulta.vue'
+import login from '../views/LoginView.vue'
+import registrate from '../views/RegistrateView.vue'
+import actualiza from '../views/ActualizaView.vue'
 const routes = [
   {
     path: '/',
@@ -9,9 +11,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/registro',
-    name: 'registro',
-    component: myRegistro
+    path: '/actualiza',
+    name: 'actualiza',
+    component: actualiza
     // props: {
     //   p_Apellido: route => ({ query: route.query.q })
     // }
@@ -25,6 +27,16 @@ const routes = [
     path: '/consulta',
     name: 'consulta',
     component: myConsulta
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+  {
+    path: '/registrate',
+    name: 'registrate',
+    component: registrate
   }
 ]
 
