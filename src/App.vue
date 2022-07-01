@@ -4,14 +4,15 @@
       <ul class="navbar-nav">
         <li class="nav-item navbar-brand">
              <router-link class="navbar-brand" to="/">Login APP </router-link>
+             <p v-if="this.p_logged && this.p_admin === true">Administrador</p>
         </li>
           <li class="nav-item">
                 <router-link to="/">Home</router-link>
           </li>
-          <li class="nav-item" v-show="false">
-              <router-link :to="{path: 'actualiza', query: {p_id: '' }}">Actualiza</router-link>
+          <li class="nav-item" v-show="this.p_admin === false && this.p_logged === true">
+              <router-link :to="{path: 'actualiza', query: {p_id: p_id }}">Actualiza</router-link>
           </li>
-          <li class="nav-item" v-if="this.p_logged">
+          <li class="nav-item" v-if="this.p_logged && this.p_admin === true">
                 <router-link to="/consulta">Usuarios</router-link>
           </li>
           <li class="nav-item">
@@ -37,14 +38,15 @@
           <ul class="navbar-nav">
             <li class="nav-item navbar-brand">
                 <router-link class="navbar-brand" to="/">Login APP</router-link>
+                <p v-if="this.p_logged && this.p_admin === true">Administrador</p>
             </li>
               <li class="nav-item">
                 <router-link to="/">Home</router-link>
               </li>
-              <li class="nav-item" v-show="false">
-                <router-link :to="{path: 'actualiza', query: {p_id: '' }}">Actualiza</router-link>
+              <li class="nav-item" v-show="this.p_admin === false && this.p_logged === true">
+                <router-link :to="{path: 'actualiza', query: {p_id: p_id }}">Actualiza</router-link>
               </li>
-              <li class="nav-item" v-if="this.p_logged === true">
+              <li class="nav-item" v-if="this.p_logged === true && this.p_admin === true">
                 <router-link to="/consulta">Usuarios</router-link>
               </li>
               <li class="nav-item" v-if="this.p_logged === false">
@@ -72,7 +74,8 @@ export default {
   data () {
     return {
       p_logged: this.$route.query.p_logged,
-      p_admin: false
+      p_admin: false,
+      p_id: ''
     }
   },
   methods: {
@@ -80,14 +83,18 @@ export default {
       this.$router.push({ path: '/', params: { p_logged: 'false' } })
       localStorage.setItem('p_logged', false)
       localStorage.setItem('admin', false)
+      localStorage.setItem('id', '')
       location.replace(location.origin)
     }
   },
   mounted () {
     // ejecuta al cargar  componente
     if (!this.p_logged) {
+      //
       const myVar = localStorage.getItem('p_logged')
       const myAdmin = localStorage.getItem('admin')
+      this.p_id = localStorage.getItem('id')
+      //
       if (myVar === 'false') {
         this.p_logged = false
       }

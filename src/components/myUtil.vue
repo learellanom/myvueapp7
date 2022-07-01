@@ -50,12 +50,29 @@ function myDataById (id){
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
    myRes = this.responseText;
-   
   }
   xhttp.open("GET", "http://localhost:3000/dataById/" + id, false);
   xhttp.send();  
+
+  if (myRes === undefined){
+    return null;
+  }
   return JSON.parse(myRes)
 }
+
+function myDataByMail (email){
+  let myRes = null;
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+   myRes = this.responseText;
+   
+  }
+  xhttp.open("GET", "http://localhost:3000/dataByMail/" + email, false);
+  xhttp.send();  
+  return JSON.parse(myRes)
+}
+
 /*
 *
 * 
@@ -193,7 +210,8 @@ export default {
   myDataById,
   myDataInsert,
   myDataUpdate,
-  myDataDelete
+  myDataDelete,
+  myDataByMail
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

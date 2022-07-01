@@ -29,34 +29,48 @@
 </template>
 
 <script>
-// import auth from "@/logic/auth";
+import myUtil from '../components/myUtil.vue'
 export default {
   data: () => ({
     email: '',
     password: '',
-    error: false
+    error: false,
     // p_logged: this.$route.query.p_logged
+    p_id: ''
   }),
   methods: {
     async login () {
       try {
-        // await auth.login(this.email, this.password);
-        const user = {
-          email: this.email
+        if (this.email === 'admin@leveltech.com') {
+          localStorage.setItem('p_logged', true)
+          localStorage.setItem('admin', true)
+          localStorage.setItem('id', 0)
+        } else {
+          const user = this.busca()
+          if (!user.id) {
+            this.error = true
+            return
+          }
+          localStorage.setItem('p_logged', true)
+          localStorage.setItem('admin', false)
+          localStorage.setItem('id', user.id)
+          console.log(user)
         }
-        // auth.setUserLogged(user);
-        console.log(user)
         this.$router.replace({ path: '/', params: { p_logged: 'true' } })
-        localStorage.setItem('p_logged', true)
-        localStorage.setItem('admin', true)
+        //
         location.replace(location.origin)
       } catch (error) {
         console.log(error)
         this.error = true
       }
+    },
+    busca: function () {
+      return myUtil.myDataByMail(this.email)
     }
   },
   mounted () {
+    this.p_id = localStorage.getItem('id')
+    this.p_id = this.$route.query.p_id
   }
 }
 </script>

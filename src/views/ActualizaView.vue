@@ -80,8 +80,6 @@ export default {
         }
        
       }
-
-
         // await auth.register(this.email, this.password);
         // myUtil.myDataInsert(this.usuario);        
         this.$router.push("/");
@@ -90,7 +88,6 @@ export default {
       }
     },
     busca : function () {
-      alert('busca : ' + this.p_id + ' y ' + JSON.stringify(myUtil.myDataById(this.p_id)))
       return myUtil.myDataById(this.p_id);
     },
     inserta: function(){
@@ -101,13 +98,10 @@ export default {
     },    
   },
   mounted () { 
-    alert(' eee ' + this.$route.query.p_id )
     this.p_id = this.$route.query.p_id 
     if (this.p_id != '') { 
-        alert('entraaa ' + this.p_id)
       let myUsuario = this.busca()
       if (myUsuario) { 
-        alert('asigna')
         this.usuario = myUsuario
       }
       this.myTitle = "Edición"
